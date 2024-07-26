@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Form -->
+    <div class="container">
+        <div class="box-outer">
+            <form name="signup_form" method="post" action="" autocomplete="off" onsubmit="validateForm(event)">
+                <h2 class="heading">Registration Form</h2>
+
+                <label>First Name</label>
+                <input type="text" name="first_name" class="input-control" placeholder="Your first name" required>
+
+                <label>Last Name</label>
+                <input type="text" name="last_name" class="input-control" placeholder="Your last name" required>
+
+                <label>Email</label>
+                <input type="email" name="email" class="input-control" placeholder="Your email address" required>
+
+                <label>Password</label>
+                <input type="password" name="password" class="input-control" placeholder="Your password" required>
+
+                <input type="submit" name="submit" class="button" value="Signup" style="margin: 0 auto; display: block;">
+            </form>
+            <hr>
+            <div id="success-message" style="display: none; color: green; text-align: center; margin-top: 1rem;">
+                Registered successfully!
+            </div>
+            <div id="error-message" style="display: none; color: red; text-align: center; margin-top: 1rem;">
+                <!-- Error message will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    <!-- Form End -->
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+            const emailInput = document.querySelector('input[name="email"]');
+            const passwordInput = document.querySelector('input[name="password"]');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+
+            let errors = [];
+
+            // Validate email ends with @gmail.com
+            if (!emailInput.value.endsWith('@gmail.com')) {
+                errors.push('Email must end with @gmail.com.');
+            }
+
+            // Validate password is at least 8 characters long
+            if (passwordInput.value.length < 8) {
+                errors.push('Password must be at least 8 characters long.');
+            }
+
+            if (errors.length > 0) {
+                errorMessage.innerHTML = errors.join('<br>');
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block'; // Display the success message
+				form.reset(); // Clear the form data
+            }
+        }
+    </script>
+</body>
+</html>
